@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="003" author="Ritesh">
+        <createTable tableName="centre">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="centre_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Centre_Farmers Table -->
+    <changeSet id="004" author="Ritesh">
+        <createTable tableName="centre_farmers">
+            <column name="centre_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="farmer_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="fk_centre_farmers_centre"
+                baseTableName="centre_farmers"
+                baseColumnNames="centre_id"
+                referencedTableName="centre"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                constraintName="fk_centre_farmers_farmer"
+                baseTableName="centre_farmers"
+                baseColumnNames="farmer_id"
+                referencedTableName="farmer"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

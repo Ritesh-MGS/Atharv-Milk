@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="002" author="Ritesh">
+        <createTable tableName="collection">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="farmer_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="milk_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fat" type="DECIMAL(5,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="snf" type="DECIMAL(5,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shift" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="collection_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="fk_collection_farmer"
+                baseTableName="collection"
+                baseColumnNames="farmer_id"
+                referencedTableName="farmer"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>
